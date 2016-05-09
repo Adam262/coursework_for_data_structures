@@ -62,7 +62,7 @@ for k,v in dict.iteritems():
 # functional programming
 
 def odd_filter(n):
-  return n & 2 == 1
+  return n % 2 == 1
 
 filter(odd_filter, ints) #=> [1,3,5]
 
