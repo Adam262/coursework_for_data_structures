@@ -30,7 +30,7 @@ range(1,10) #=> [1,2,3,4,5,6,7,8,9,10]
   # immutable
   # can be nested
 tup1 = 1,2,3 #=> (1,2,3)
-tup2 = tup1, #=> ((1,2,3), 4)
+tup2 = tup1, 4#=> ((1,2,3), 4)
 
 # dictionary
 
@@ -45,7 +45,7 @@ names = ['adam', 'darcy', 'brian', 'alyssa']
 for i,v in enumerate(names):
   print i, ':', v
 
-#=> 0 : 'adam' 
+#=> 0 : 'adam'
 # and so on...
 
 for name in names:
@@ -55,7 +55,7 @@ for name in names:
 # and so on
 
 for k,v in dict.iteritems():
-  print k, ':', v 
+  print k, ':', v
   #=> 'x': 1
   #=> 'y': 2
 
@@ -65,12 +65,13 @@ def odd_filter(n):
   return n % 2 == 1
 
 filter(odd_filter, ints) #=> [1,3,5]
+filter(lambda n: n % 2 == 1, ints)
 
 def cube(n):
   return n * n * n
 
 map(cube, ints) #=> [1,8,27,64,125]
-
+map(lambda n: n ** 3, ints)
 # finding
 
 1 in dupList #=> True
