@@ -4,7 +4,7 @@ class AlphabetCipher:
   def __init__(self, alphabet, keyword):
     self.alphabet = list(alphabet)
     self.keyword = keyword
-    self.grid = self.__make_grid()
+    self.grid = reduce(self.__make_grid, self.alphabet, {})
 
   def encode(self, message):
     cycled_keyword = self.__cycle(self.keyword, len(message))
@@ -14,12 +14,9 @@ class AlphabetCipher:
   def decode(self, encrypted_message):
     cycled_keyword = self.__cycle(self.keyword, len(encrypted_message))
 
-    return ''.join(map(self.__encode_single_char, list(cycled_keyword), list(encrypted_message)))
+    return ''.join(map(self.__decode_single_char, list(cycled_keyword), list(encrypted_message)))
 
-  def __make_grid(self):
-    return reduce(self.__set_rotated_key, self.alphabet, {})
-
-  def __set_rotated_key(self, memo, char):
+  def __make_grid(self, memo, char):
     idx = self.alphabet.index(char)
     memo[char] = self.alphabet[idx:] + self.alphabet[:idx]
 
@@ -42,8 +39,12 @@ class AlphabetCipher:
     return self.grid[column_char][self.alphabet.index(row_char)]
 
   def __decode_single_char(self, column_char, row_char):
-    return ''
+    return self.alphabet[self.grid[column_char].index(row_char)]
 
 cipher = AlphabetCipher(alphabet="abc", keyword="bc")
 encoded_message = cipher.encode(message='cabba')
+print('encoded message: ' + encoded_message, 'decoded message: ' + cipher.decode(encoded_message))
+
+cipher = AlphabetCipher(alphabet="abcdefghijklmnopqrstuvwxyz", keyword="scones")
+encoded_message = cipher.encode(message='meetmebythetree')
 print('encoded message: ' + encoded_message, 'decoded message: ' + cipher.decode(encoded_message))
