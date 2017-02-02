@@ -51,6 +51,5 @@ def recursive_rev_single(list_param):
   if len(list_param) == 1:
     return list_param
   else:
-    new_list = [list_param.pop()]
-    return new_list + recursive_rev_single(list_param)
+    return [list_param.pop()] + recursive_rev_single(list_param)
 
