@@ -30,3 +30,20 @@ print_range_comprehension(10) # 0.147661924362 milliseconds
 print_range_append(10) # 0.306292057037 milliseconds
 print_range_concat(10) # By far slowest, 6.54352807999 milliseconds
 
+# iterative reverse list
+def rev(list_param):
+  new_list = []
+
+  while len(list_param) > 0:
+    new_list.append(list_param.pop())
+
+  return new_list
+
+# recursive reverse list
+def recursive_rev(list_param, new_list):
+  if len(list_param) == 1:
+    return new_list + list_param
+  else:
+    new_list.append(list_param.pop())
+    return recursive_rev(list_param, new_list)
+
